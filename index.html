@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+    />
+</head>
+<body>
+    
+    <!-- Parent container to split desktop & taskbar -->
+    <div id="os-root" class="grid [grid-template-rows:1fr_auto] [grid-auto-flow:column] h-screen w-screen overflow-hidden">
+
+        <!-- DESKTOP-->
+        <div id="desktop"
+            class="relative grid 
+            [grid-auto-flow:column] 
+            [grid-template-rows:repeat(auto-fill,_80px)] 
+            [grid-auto-columns:80px] 
+            bg-cover bg-center text-white
+            bg-[url('https://images.unsplash.com/photo-1459909633680-206dc5c67abb?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] 
+            place-items-center">
+            
+            <!-- FOLDER ICON -->
+            
+            <div id="desktop-folder">
+                <div class="icon mt-3 flex flex-col items-center text-center cursor-pointer">
+                    <img class="w-12 h-11 object-contain"
+                        src="https://img.icons8.com/fluency/48/monitor--v1.png" alt="This PC">
+                    <span class=" text-sm">This PC</span>
+                </div>
+            </div>
+            <div id="desktop-folder">
+                <div class="icon mt-3 flex flex-col items-center text-center cursor-pointer">
+                    <img class="w-12 h-10 object-contain"
+                        src="https://img.icons8.com/color/48/recycle-bin.png" alt="Recycle bin">
+                    <span class=" text-sm">Recycle bin</span>
+                </div>
+            </div>
+            <div id="desktop-folder">
+                <div class="icon flex flex-col items-center text-center cursor-pointer">
+                    <img class="w-12 h-11 object-contain"
+                        src="https://img.icons8.com/fluency/48/chrome.png" alt="chrome">
+                    <span class=" text-sm">Chrome</span>
+                </div>
+            </div>
+            <div id="desktop-folder">
+                <div class="icon flex flex-col items-center text-center cursor-pointer">
+                    <img class="w-14 h-13 object-contain"
+                        src="https://img.icons8.com/plasticine/150/apple-notes--v2.png" alt="Notes">
+                    <span class=" text-sm">Notebook</span>
+                </div>
+            </div><div id="desktop-folder">
+                <div class="icon flex flex-col items-center text-center cursor-pointer">
+                    <img class="w-12 h-12 object-contain"
+                        src="https://img.icons8.com/color/48/youtube-play.png" alt="youtube">
+                    <span class=" text-sm">Youtube</span>
+                </div>
+            </div>
+           
+        </div>
+
+        <!-- WINDOW HIDDEN MENU -->
+        <div id="dbl-click-menu" class="hidden absolute bg-gray-200 shadow-lg rounded-[3%] w-40 z-50 text-sm py-2 select-none border border-black-300 box-border w-fit">
+            <div class="flex flex-col">
+                <div class="flex items-center justify-between px-4 py-2 hover:bg-gray-100 rounded mx-1.5 font-medium cursor-pointer">
+                    <span class="flex items-center gap-2">
+                        <i class="ri-function-line"></i>
+                        View
+                    </span>
+                    <i class="ri-arrow-right-s-line"></i>
+                </div>
+                <div class="flex items-center justify-between px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                    <span class="flex items-center gap-2">
+                        <i class="ri-arrow-up-down-line"></i>
+                        Sort By
+                    </span>
+                    <i class="ri-arrow-right-s-line"></i>
+                </div>
+                <div id="refresh" class="flex items-center justify-between px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    onclick="{refreshDesktop()}">
+                    <span class="flex items-center gap-2">
+                        <i class="ri-restart-line"></i>
+                        Refresh
+                    </span>
+                </div>
+                <div class="flex items-center justify-between px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    onclick="createNewFolder()">
+                    <span class="flex items-center gap-2">
+                        <i class="ri-add-circle-line"></i>
+                        New
+                    </span>
+                    <i class="ri-arrow-right-s-line"></i>
+                </div>
+                <div class="flex items-center justify-between px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                    <span class="flex items-center gap-2">
+                        <i class="ri-settings-3-line"></i>
+                        Display Settings
+                    </span>
+                </div>
+                <div class="flex items-center justify-between px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                    <span class="flex items-center gap-2">
+                        <i class="ri-pen-nib-line"></i>
+                        Personalize
+                    </span>
+                </div>
+                <div class="flex items-center justify-between px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                    <span class="flex items-center gap-2">
+                        <i class="ri-terminal-box-fill"></i>
+                        Open in Terminal
+                    </span>
+                </div>
+                <div class="flex items-center justify-between px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                    <span class="flex items-center gap-2">
+                        <i class="ri-slideshow-4-line"></i>
+                        Show more options
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOLDER HIDDEN MENU -->
+         <div id="folder-menu" class="hidden absolute bg-white w-fit shadow-lg m-5 rounded-[3%] border border-black-600 box-border cursor-pointer ">
+            <div class="upper-bar bg-white gap-5 h-auto flex px-4 py-2 text-center items-center justify-between border-b-2 border-black-900">
+                <div class="cut flex flex-col items-center">
+                    <img width="19 " height="24" class="rotate-[270deg]" src="https://img.icons8.com/material-rounded/24/cut.png" alt="cut"/>
+                    Cut
+                </div>
+                <div class="copy flex flex-col items-center">
+                    <img width="19 " height="24" src="https://img.icons8.com/fluency-systems-regular/48/copy--v1.png" alt="cut"/>
+                    Copy
+                </div>
+                <div id="rename" class="Rename flex flex-col items-center">
+                    <img width="19 " height="24" src="https://img.icons8.com/ios-glyphs/30/rename.png" alt="cut"/>
+                    Rename
+                </div>
+                <div class="share flex flex-col items-center">
+                    <img width="19 " height="24" src="https://img.icons8.com/material-outlined/24/share-3.png" alt="cut"/>
+                    Share
+                </div>
+                <div id="delete" class="delete flex flex-col items-center">
+                    <img width="19 " height="24" src="https://img.icons8.com/material-sharp/24/filled-trash.png" alt="cut"/>
+                    Delete
+                </div>
+                
+            </div>
+            <div class="lower-menu  h-auto">
+                <div id="open" class="lower-menu px-4 hover:bg-gray-200 rounded  flex gap-2 items-center mt-2 mb-2">
+                    <img width="18" height="18" class="inline" src="https://img.icons8.com/material-rounded/24/opened-folder.png" alt="open"/>
+                    Open
+                </div>
+                <div class="lower-menu px-4 hover:bg-gray-200 rounded flex gap-2 items-center mt-3 mb-3">
+                    <img width="18" height="18" class="inline" src="https://img.icons8.com/material-outlined/24/share-3.png" alt="share"/>
+                    Share
+                </div>
+                <div class="lower-menu px-4 hover:bg-gray-200 rounded flex gap-2 items-center mt-3 mb-3">
+                    <img width="18" height="18" class="inline" src="https://img.icons8.com/material-rounded/24/pin.png" alt="pin"/>
+                    Pin to quick access
+                </div>
+                <div class="lower-menu px-4 hover:bg-gray-200 rounded  flex gap-2 items-center mt-3 mb-3">
+                    <img width="18" height="18" class="inline" src="https://img.icons8.com/material-outlined/24/document--v1.png" alt="properties"/>
+                    Properties
+                </div>
+                <div class="lower-menu px-4 hover:bg-gray-200 rounded  flex gap-2 items-center mt-3 mb-3">
+                    <img width="18" height="18" class="inline" src="https://img.icons8.com/material-rounded/24/console.png" alt="terminal"/>
+                    Open in Terminal
+                </div>
+                <div class="lower-menu px-4 hover:bg-gray-200 rounded  flex gap-2 items-center mt-3 mb-3">
+                    <img width="18" height="18" class="inline" src="https://img.icons8.com/material-outlined/24/more.png" alt="more-options"/>
+                    Show more Options
+                </div>
+            </div>
+        </div>
+
+        <!-- TASKBAR -->
+        <div id="taskbar" class="bg-white text-gray-100 px-4 py-2 shadow-lg">
+            <div id="taskbar-icons" class="flex justify-between items-center w-full">
+                <div class="left-icons flex items-center gap-3 px-2">
+                    <svg class="window-img h-9 w-9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgba(83,148,217,1)">
+                        <path d="M11.501 3V11.5H3.00098V3H11.501ZM11.501 21H3.00098V12.5H11.501V21ZM12.501 3H21.001V11.5H12.501V3ZM21.001 12.5V21H12.501V12.5H21.001Z"></path>
+                    </svg>
+                    <input 
+                        type="text"
+                        placeholder="Search"
+                        class="h-8 rounded-xl text-black bg-gray-300 w-50 mb-1 mt-1 px-3 border border-box border-blue-300"
+                    >
+                </div>
+                <div class="extra-icons flex items-center justify-center gap-4">
+                    <style>
+                        .taskbar-icon {
+                            transition: transform 0.15s cubic-bezier(0.4,0,0.2,1);
+                        }
+                        .taskbar-icon:hover {
+                            transform: scale(1.15);
+                        }
+                    </style>
+                    <img class="h-9 w-9 taskbar-icon" style="filter: drop-shadow(0 4px 4px rgba(0,0,0,0.7));" src="https://img.icons8.com/color/48/telegram-app--v1.png" alt="telegram"/>
+                    <img class="h-9 w-9 taskbar-icon" style="filter: drop-shadow(0 2px 2px rgba(0,0,0,0.7));" src="https://img.icons8.com/fluency/48/picture.png" alt="gallery"/>
+                    <img class="h-9 w-9 taskbar-icon" style="filter: drop-shadow(0 4px 2px rgba(0,0,0,0.7));" src="https://img.icons8.com/fluency/48/settings.png" alt="settings"/>
+                    <img class="h-9 w-9 taskbar-icon" style="filter: drop-shadow(0 4px 2px rgba(0,0,0,0.7));" src="https://img.icons8.com/fluency/48/music.png" alt="music"/>
+                    <img class="h-9 w-9 taskbar-icon" style="filter: drop-shadow(0 4px 2px rgba(0,0,0,0.7));" src="https://img.icons8.com/fluency/48/calendar.png" alt="calendar"/>
+                    <img class="h-9 w-9 taskbar-icon" style="filter: drop-shadow(0 4px 2px rgba(0,0,0,0.7));" src="https://img.icons8.com/fluency/48/console.png" alt="console"/>
+                    <img class="h-9 w-9 taskbar-icon" style="filter: drop-shadow(0 4px 2px rgba(0,0,0,0.7));" src="https://img.icons8.com/fluency/48/folder-invoices--v1.png" alt="folder-invoices--v1"/>
+                    <img class="h-9 w-9 taskbar-icon" style="filter: drop-shadow(0 4px 2px rgba(0,0,0,0.7));" src="https://img.icons8.com/fluency/48/microsoft-store.png" alt="microsoft-store"/>
+                    <img class="h-9 w-9 taskbar-icon" style="filter: drop-shadow(0 4px 2px rgba(0,0,0,0.7));" src="https://img.icons8.com/fluency/48/mail--v1.png" alt="mail--v1"/>
+                </div>
+                <div class="right-icons flex items-center gap-4">
+                    <h3 class="text-center">🕒 Clock</h3>
+                    <h3 class="text-center">🌤️ Weather</h3>
+                    <h3 class="text-center">🔋 Battery</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div id="forlder-div" class="folder-window z-50 fixed inset-0 bg-white z-50 hidden flex flex-col bg-gray-200">
+      <div class="upper flex flex-start justify-between h-6 bg-red-200">
+        <span>forlder name</span>
+        <span>functanility</span>
+      </div>
+    </div> -->
+
+    <div id="folder-window"
+        class="folder-div hidden relative fixed h-screen w-screen bg-white z-50 inset-0 flex flex-col"
+    >
+        <div class="flex justify-between items-center bg-gray-200 p-2">
+            <span class="text-lg font-semibold">My Folder</span>
+            <button onclick="closeFolder('folder1')" class="bg-red-500 text-white px-2 py-1 rounded">X</button>
+        </div>
+        <div class="p-4 text-center">
+            This folder is empty.
+        </div>
+    </div>
+
+    <div id="windowImg" class="auto w-80 bg-red-300 flex flex-col ">
+        <div class="upperdiv">
+            <div class=" relative w-full h-9 bg-yellow-500 pl-2 pr-2">
+                <input type="text" class="w-full h-7 mt-1 rounded-xl bg-red-200">
+            </div>
+            <!-- <input type="text" class="w-full h-8 bg-grey-500"> -->
+        </div>
+        <div class="middlediv h-22 w-full bg-white ">
+            <div class="middleUpper flex justify-between">
+                <div class="middleInner">Pinned</div>
+                <div class="middleInner">All</div>
+            </div>
+            
+            <div class="middleLower grid grid-cols-5 gap-5 p-5">
+                <div class="flex flex-col items-center">
+                    <img width="48" height="48" src="https://img.icons8.com/color/48/whatsapp--v1.png" alt="whatsapp--v1"/>
+                    <span class="text-xs mt-1">WhatsApp</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img width="48" height="48" src="https://img.icons8.com/color/48/ms-edge-new.png" alt="ms-edge-new"/>
+                    <span class="text-xs mt-1">Edge</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://img.icons8.com/color/48/microsoft-word-2019--v2.png" alt="Word" class="w-10 h-10">
+                    <span class="text-xs mt-1">Word</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img width="48" height="48" src="https://img.icons8.com/color/48/microsoft-powerpoint-2019--v1.png" alt="PowerPoint"/>
+                    <span class="text-xs mt-1">PowerPoint</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img width="48" height="48" src="https://img.icons8.com/fluency/48/microsoft-365.png" alt="microsoft-365"/>                    <span class="text-xs mt-1">Microsoft 365</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img width="48" height="48" src="https://img.icons8.com/color/48/microsoft-outlook-2019.png" alt="Outlook"/>
+                    <span class="text-xs mt-1">Outlook</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img width="48" height="48" src="https://img.icons8.com/fluency/48/microsoft-store.png" alt="microsoft-store"/>                    <span class="text-xs mt-1">Microsoft Store</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img width="48" height="48" src="https://img.icons8.com/fluency/48/photos.png" alt="photos"/>
+                    <span class="text-xs mt-1">Photos</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img width="48" height="48" src="https://img.icons8.com/color/48/amazon.png" alt="amazon"/>
+                    <span class="text-xs mt-1">Amazon Gaming</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img width="48" height="48" src="https://img.icons8.com/color/48/adobe-photoshop--v1.png" alt="Adobe"/>
+                    <span class="text-xs mt-1">Adobe</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img width="48" height="48" src="https://img.icons8.com/color/48/settings--v1.png" alt="Settings"/>
+                    <span class="text-xs mt-1">Settings</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img width="48" height="48" src="https://img.icons8.com/fluency/48/spotify.png" alt="spotify"/>                    <span class="text-xs mt-1">Spotify</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img width="48" height="48" src="https://img.icons8.com/color/48/espn.png" alt="ESPN"/>
+                    <span class="text-xs mt-1">ESPN</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img width="48" height="48" src="https://img.icons8.com/fluency/48/instagram-new.png" alt="instagram-new"/>                    <span class="text-xs mt-1">Instagram</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img width="48" height="48" src="https://img.icons8.com/fluency/48/amazon-prime-video.png" alt="amazon-prime-video"/>                    <span class="text-xs mt-1">Prime Videos</span>
+                </div>
+                
+                <!-- Repeat for all other icons -->
+            </div>
+        </div>
+        <div class="bottomdiv"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

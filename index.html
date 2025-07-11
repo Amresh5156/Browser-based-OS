@@ -9,6 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link
     href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+
     rel="stylesheet"
     />
 </head>
@@ -179,10 +180,10 @@
         </div>
 
         <!-- TASKBAR -->
-        <div id="taskbar" class="bg-white text-gray-100 px-4 py-2 shadow-lg">
+        <div id="taskbar" class="z-50 bg-white text-gray-100 px-4 py-2 shadow-lg">
             <div id="taskbar-icons" class="flex justify-between items-center w-full">
                 <div class="left-icons flex items-center gap-3 px-2">
-                    <svg class="window-img h-9 w-9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgba(83,148,217,1)">
+                    <svg id="window-icon" class="h-9 w-9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgba(83,148,217,1)">
                         <path d="M11.501 3V11.5H3.00098V3H11.501ZM11.501 21H3.00098V12.5H11.501V21ZM12.501 3H21.001V11.5H12.501V3ZM21.001 12.5V21H12.501V12.5H21.001Z"></path>
                     </svg>
                     <input 
@@ -238,82 +239,114 @@
         </div>
     </div>
 
-    <div id="windowImg" class="auto w-80 bg-red-300 flex flex-col ">
+    <div id="windowImg" class="fixed bg-gray-50 bottom-0 left-[70px] top-[110px] w-[400px] flex flex-col transition-transform duration-500 translate-y-full">
         <div class="upperdiv">
-            <div class=" relative w-full h-9 bg-yellow-500 pl-2 pr-2">
-                <input type="text" class="w-full h-7 mt-1 rounded-xl bg-red-200">
+            <div class=" relative w-full pl-2 pr-2 py-2">
+                <input type="text" class="w-full h-8 rounded-xl pl-2 bg-gray-200" placeholder="Search for app, settings and documents">
             </div>
             <!-- <input type="text" class="w-full h-8 bg-grey-500"> -->
         </div>
-        <div class="middlediv h-22 w-full bg-white ">
-            <div class="middleUpper flex justify-between">
-                <div class="middleInner">Pinned</div>
-                <div class="middleInner">All</div>
+        <div class="middlediv h-22 w-full  ">
+            <div class="middleUpper flex justify-between px-4 mt-2">
+                <div class="middleInner font-semibold">Pinned</div>
             </div>
             
-            <div class="middleLower grid grid-cols-5 gap-5 p-5">
-                <div class="flex flex-col items-center">
-                    <img width="48" height="48" src="https://img.icons8.com/color/48/whatsapp--v1.png" alt="whatsapp--v1"/>
+            <div class="middleLower grid grid-cols-5 gap-5 p-5 -mt-3">
+                <div class="flex flex-col items-center justify-center max-w-10">
+                    <img src="https://img.icons8.com/color/48/whatsapp--v1.png" alt="whatsapp--v1"/>
                     <span class="text-xs mt-1">WhatsApp</span>
                 </div>
-                <div class="flex flex-col items-center">
-                    <img width="48" height="48" src="https://img.icons8.com/color/48/ms-edge-new.png" alt="ms-edge-new"/>
+                <div class="flex flex-col items-center justify-center max-w-10">
+                    <img src="https://img.icons8.com/color/48/ms-edge-new.png" alt="ms-edge-new"/>
                     <span class="text-xs mt-1">Edge</span>
                 </div>
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center justify-center max-w-10">
                     <img src="https://img.icons8.com/color/48/microsoft-word-2019--v2.png" alt="Word" class="w-10 h-10">
                     <span class="text-xs mt-1">Word</span>
                 </div>
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center justify-center max-w-10">
                     <img width="48" height="48" src="https://img.icons8.com/color/48/microsoft-powerpoint-2019--v1.png" alt="PowerPoint"/>
                     <span class="text-xs mt-1">PowerPoint</span>
                 </div>
-                <div class="flex flex-col items-center">
-                    <img width="48" height="48" src="https://img.icons8.com/fluency/48/microsoft-365.png" alt="microsoft-365"/>                    <span class="text-xs mt-1">Microsoft 365</span>
+                <div class="flex flex-col items-center justify-center max-w-10">
+                    <img src="https://img.icons8.com/fluency/48/microsoft-365.png" alt="microsoft-365"/>
+                    <span class="text-xs  mt-1">Microsoft 365</span>
                 </div>
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center justify-center max-w-10">
                     <img width="48" height="48" src="https://img.icons8.com/color/48/microsoft-outlook-2019.png" alt="Outlook"/>
                     <span class="text-xs mt-1">Outlook</span>
                 </div>
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center justify-center max-w-10">
                     <img width="48" height="48" src="https://img.icons8.com/fluency/48/microsoft-store.png" alt="microsoft-store"/>                    <span class="text-xs mt-1">Microsoft Store</span>
                 </div>
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center justify-center max-w-10">
                     <img width="48" height="48" src="https://img.icons8.com/fluency/48/photos.png" alt="photos"/>
                     <span class="text-xs mt-1">Photos</span>
                 </div>
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center justify-center max-w-10">
                     <img width="48" height="48" src="https://img.icons8.com/color/48/amazon.png" alt="amazon"/>
                     <span class="text-xs mt-1">Amazon Gaming</span>
                 </div>
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center justify-center max-w-10">
                     <img width="48" height="48" src="https://img.icons8.com/color/48/adobe-photoshop--v1.png" alt="Adobe"/>
                     <span class="text-xs mt-1">Adobe</span>
                 </div>
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center justify-center max-w-10">
                     <img width="48" height="48" src="https://img.icons8.com/color/48/settings--v1.png" alt="Settings"/>
                     <span class="text-xs mt-1">Settings</span>
                 </div>
-                <div class="flex flex-col items-center">
-                    <img width="48" height="48" src="https://img.icons8.com/fluency/48/spotify.png" alt="spotify"/>                    <span class="text-xs mt-1">Spotify</span>
+                <div class="flex flex-col items-center justify-center max-w-10">
+                    <img width="48" height="48" src="https://img.icons8.com/fluency/48/spotify.png" alt="spotify"/>
+                    <span class="text-xs mt-1">Spotify</span>
                 </div>
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center justify-center max-w-10">
                     <img width="48" height="48" src="https://img.icons8.com/color/48/espn.png" alt="ESPN"/>
                     <span class="text-xs mt-1">ESPN</span>
                 </div>
-                <div class="flex flex-col items-center">
-                    <img width="48" height="48" src="https://img.icons8.com/fluency/48/instagram-new.png" alt="instagram-new"/>                    <span class="text-xs mt-1">Instagram</span>
+                <div class="flex flex-col items-center justify-center max-w-10">
+                    <img width="48" height="48" src="https://img.icons8.com/fluency/48/instagram-new.png" alt="instagram-new"/>                    
+                    <span class="text-xs mt-1">Instagram</span>
                 </div>
-                <div class="flex flex-col items-center">
-                    <img width="48" height="48" src="https://img.icons8.com/fluency/48/amazon-prime-video.png" alt="amazon-prime-video"/>                    <span class="text-xs mt-1">Prime Videos</span>
+                <div class="flex flex-col items-center justify-center max-w-10">
+                    <img width="48" height="48" src="https://img.icons8.com/fluency/48/amazon-prime-video.png" alt="amazon-prime-video"/>                    
+                    <span class="text-xs mt-1">Prime Videos</span>
                 </div>
-                
-                <!-- Repeat for all other icons -->
+            </div>
+
+            <div class="recomended w-full px-3">
+                <h3 class="font-semibold mb-1">Recomended</h3>
+                <div class="recomended-icons grid grid-cols-2 gid-rows-3 w-full gap-8 py-1 ">
+                        <div class="flex items-center h-7 w-10">
+                            <img src="https://img.icons8.com/color/48/whatsapp--v1.png" alt="whatsapp--v1"/>
+                            <span class="text-xs pl-2">WhatsApp</span>
+                        </div>
+                        <div class="flex items-center h-7 w-10">
+                            <img src="https://img.icons8.com/color/48/ms-edge-new.png" alt="ms-edge-new"/>
+                            <span class="text-xs pl-2">Edge</span>
+                        </div>
+                        <div class="flex items-center h-7 w-10">
+                            <img src="https://img.icons8.com/color/48/microsoft-word-2019--v2.png" alt="Word" class="w-10 h-10">
+                            <span class="text-xs pl-2">Word</span>
+                        </div>
+                        <div class="flex items-center h-7 w-10">
+                            <img src="https://img.icons8.com/color/48/microsoft-powerpoint-2019--v1.png" alt="PowerPoint"/>
+                            <span class="text-xs pl-2">PowerPoint</span>
+                        </div>
+                        <div class="flex items-center h-7 w-10">
+                            <img width="48" height="48" src="https://img.icons8.com/fluency/48/microsoft-365.png" alt="microsoft-365"/>
+                            <span class="text-xs pl-2">Microsoft 365</span>
+                        </div>
+                        <div class="flex items-center h-7 w-10">
+                            <img width="48" height="48" src="https://img.icons8.com/color/48/microsoft-outlook-2019.png" alt="Outlook"/>
+                            <span class="text-xs pl-2">Outlook</span>
+                        </div>
+                </div>
             </div>
         </div>
-        <div class="bottomdiv"></div>
+
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="script.js"></script>
 </body>
 </html>

@@ -92,19 +92,56 @@ function openFolderWindow(folderName) {
     folderWindow.className = "folder-window fullscreen fixed top-0 left-0 w-full h-full bg-white z-50 flex flex-col";
     folderWindow.setAttribute("data-folder", folderName);
 
-    // Add a simple header with folder name and close button
     let header = document.createElement("div");
-    header.className = "flex items-center justify-between p-4 bg-gray-200 border-b";
+    header.className = "flex items-center justify-between px-2 bg-gray-200 border-b";
     let title = document.createElement("span");
     title.textContent = folderName;
-    let closeBtn = document.createElement("button");
-    closeBtn.textContent = "Close";
-    closeBtn.className = "ml-4 px-2 py-1 bg-red-500 text-white rounded";
+
+    let sideHeader = document.createElement("div")
+    sideHeader.className = "flex gap-4 items-center px-2 bg-gray-200 border-b"
+    let closeBtn = document.createElement("img");
+    closeBtn.setAttribute("src", "https://img.icons8.com/ios/50/multiply.png");
+    closeBtn.className = "h-8 py-1 hover:bg-red-200";
     closeBtn.onclick = function() {
         folderWindow.style.display = "none";
     };
+    let multiTab = document.createElement("img")
+    multiTab.setAttribute("src", "https://img.icons8.com/external-compact-zufarizal-robiyanto/32/external-copy-compact-ui-essential-vol2-compact-zufarizal-robiyanto.png")
+    multiTab.className = "h-3 w-5 hover:by-gray-100"
+    multiTab.addEventListener("click", function(e){
+        console.log(e);   
+    })
+    let minimiseBtn = document.createElement("img");
+    minimiseBtn.setAttribute("src", "https://img.icons8.com/material-outlined/24/minus.png");
+    minimiseBtn.className = "h-4 w-4";
+
+    minimiseBtn.addEventListener("click", function (e) {
+        folderWindow.style.display = "none";
+
+        if (!document.getElementById(`folderIcon-${folderName}`)) {
+            const icon = document.createElement("div");
+            icon.className = "taskbar-icon cursor-pointer flex flex-col justify-center items-center gap-1 px-2";
+            icon.id = `folderIcon-${folderName}`;
+            icon.innerHTML = `<img src="https://img.icons8.com/fluency/24/folder-invoices--v1.png" class="w-7 h-7 mt-1" alt="folder"/> <span class="text-xs text-black -mt-2">${folderName}</span>`;
+
+            icon.addEventListener("click", () => {
+                folderWindow.style.display = "block";
+                icon.remove();
+            });
+
+            let taskbar = document.querySelector(".extra-icons");
+            if (taskbar) {
+                taskbar.appendChild(icon);
+            }
+        }
+    });
+
+    
     header.appendChild(title);
-    header.appendChild(closeBtn);
+    header.appendChild(sideHeader);
+    sideHeader.appendChild(minimiseBtn);
+    sideHeader.appendChild(multiTab);
+    sideHeader.appendChild(closeBtn);
 
     // Folder content area (empty for now)
     let content = document.createElement("div");
@@ -465,18 +502,10 @@ document.addEventListener("click", () => {
     hidden.classList.add("hidden");
 });
 
-let windowimg = document.querySelector("window-img")
-windowimg.addEventListener("click", function(){
-    let windowimgDiv = document.createElement("div")
-    windowimgDiv.className = " z-50 bg-red-300 h-52 w-52 mb-3 p-3 flex flex-col justify-between"
-
-    let upperdiv = windowimgDiv.createElement("div")
-    let input = upperdiv.createElement("span")
-    input.className = "w-full h-9 bg-grey-500"
-
-
-    let middlediv = windowimgDiv.createElement("div")
-    let bottomdiv = windowimgDiv.createElement("div")
-
-
+let windowicon = document.getElementById("window-icon")
+let windowdiv = document.getElementById("windowImg")
+windowicon.addEventListener("click", () =>{
+    windowdiv.classList.toggle("translate-y-full")
 })
+
+
